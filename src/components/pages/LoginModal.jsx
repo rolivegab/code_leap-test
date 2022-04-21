@@ -46,7 +46,7 @@ const StyledTextField = styled(TextField)({
 });
 
 function ModalComp() {
-  const [name, setName] = useState();
+  const [name, setName] = useState('');
   const navigator = useNavigate();
   const dispatch = useDispatch();
 

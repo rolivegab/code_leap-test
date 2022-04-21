@@ -8,14 +8,14 @@ export const slice = createSlice({
   },
   reducers: {
     changeUser(state, { payload }) {
-      localStorage.setItem("name", payload)
-      localStorage.setItem("isLogged", "true")
+      localStorage.setItem("name", payload);
+      localStorage.setItem("isLogged", "true");
       state.isLogged = true;
       state.name = payload;
     },
     logout(state) {
-      localStorage.setItem("name", "")
-      localStorage.setItem("isLogged", false)
+      localStorage.setItem("name", "");
+      localStorage.setItem("isLogged", false);
       state.isLogged = false;
       state.name = "";
     },

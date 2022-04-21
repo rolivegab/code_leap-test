@@ -11,7 +11,7 @@ function Initial() {
     const nextPage = () => {
       setTimeout(() => {
         navigator("/loginmodal");
-      }, 2500);
+      }, 1500);
     };
 
     nextPage();
@@ -25,4 +25,5 @@ function Initial() {
     </Container>
   );
 }
+
 export default Initial;

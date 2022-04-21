@@ -8,12 +8,12 @@ import {
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import styles from "./Posts.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import EditIcon from "@material-ui/icons/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { deletePost } from "../../redux/postListSlice";
-
+import { insertPost } from "../../redux/postListSlice";
 const StyledTextField = styled(TextField)({
   [`& .${outlinedInputClasses.root} .${outlinedInputClasses.notchedOutline}`]: {
     borderColor: "#777777",
@@ -49,29 +49,31 @@ function Post() {
   const postList = useSelector((state) => state.postList);
   const [postToBeDeleted, setPostToBeDeleted] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
-  const dispatch = useDispatch()
   const postOwner = useSelector((state) => state.user.name);
+  const dispatch = useDispatch();
 
-  const seletcPostToBeDeleted = (idPost) => {
+  const selectPostToBeDeleted = (idPost) => {
     setPostToBeDeleted(idPost);
   };
 
   const confirmDelete = () => {
     setPostToBeDeleted(undefined);
-    dispatch(deletePost(postToBeDeleted))
+    dispatch(deletePost(postToBeDeleted));
   };
 
-  const cancelDelete = () => {
+  const cancelDeletion = () => {
     setPostToBeDeleted(undefined);
-  }
+  };
 
   const editPost = () => {
     setIsEditModal(true);
+
   };
 
   const saveEdit = () => {
     setIsEditModal(false);
   };
+
   return (
     <div>
       <div>
@@ -84,7 +86,9 @@ function Post() {
               {postOwner === idPost.author ? (
                 <div className={styles.containerIcons}>
                   <div className={styles.iconsClass}>
-                    <DeleteForeverIcon onClick={() => seletcPostToBeDeleted(idPost)} />
+                    <DeleteForeverIcon
+                      onClick={() => selectPostToBeDeleted(idPost)}
+                    />
                   </div>
                   <div className={styles.iconsClass}>
                     <EditIcon onClick={editPost} />
@@ -133,9 +137,7 @@ function Post() {
             </div>
             <div className={styles.deteleBtnBox}>
               <div className={styles.confirmationBtn}>
-                <Button onClick={cancelDelete}>
-                  cancelar
-                </Button>
+                <Button onClick={cancelDeletion}>cancelar</Button>
                 <Button onClick={confirmDelete}>ok</Button>
               </div>
             </div>
@@ -148,6 +150,8 @@ function Post() {
             <div className={styles.editConfirmation}>
               <p>Edit item</p>
             </div>
+            {/*
+            {postList.map((idPost) => (*/}
             <div>
               <StyledTextField
                 fullWidth={true}
@@ -155,7 +159,7 @@ function Post() {
                 label="Title"
                 name="name"
                 placeholder="Hello world"
-              ></StyledTextField>
+              />
               <TextareaAutosize
                 aria-label="minimum height"
                 minRows={8}
@@ -176,8 +180,10 @@ function Post() {
                   color: "#000000",
                 }}
                 name="postsContent"
-              ></TextareaAutosize>
+              />
             </div>
+            {/*))}*/}
+
             <div className={styles.saveBtn}>
               <Button onClick={saveEdit}>save</Button>
             </div>
